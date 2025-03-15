@@ -1,0 +1,24 @@
+---
+title: ItemTracker DB
+---
+erDiagram
+    Company {
+        uid id
+        string name
+    }
+
+    Location {
+        uid id
+        str name
+        string external_id
+    }
+
+    Item {
+        uid id
+        string external_id
+        int stock
+        str url
+    }
+
+    Company ||--o{ Location: has
+    Location ||--o{ Item: stores
