@@ -1,0 +1,16 @@
+services:
+  item-tracker:
+    build:
+      context: ./
+      dockerfile: build/backend/Dockerfile
+    ports:
+      - "3000:80"
+    volumes:
+      - "./itemtracker/:/app/itemtracker"
+    restart: unless-stopped
+    command: "python3 manage.py runserver 0.0.0.0:80"
+    # env_file:
+    #   - .env
+  # redis:
+  #   image: redis
+  #   restart: always

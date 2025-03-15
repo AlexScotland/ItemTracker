@@ -1,0 +1,4 @@
+**/__pycache__/ # Ignore Python byte code
+**/*.pyc # Ignore Python byte code
+**/db.sqlite3 # Ignore SQLite database
+.env # Ignore environment file

@@ -1,0 +1,5 @@
+django==4.0.4
+djangorestframework==3.13.1
+requests==2.32.3
+beautifulsoup4==4.13.3
+gunicorn==23.0.0
