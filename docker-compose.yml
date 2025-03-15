@@ -9,6 +9,8 @@ services:
       - "./itemtracker/:/app/itemtracker"
     restart: unless-stopped
     command: "python3 manage.py runserver 0.0.0.0:80"
+    environment:
+      - WORKER_COUNT=2
     # env_file:
     #   - .env
   # redis:
