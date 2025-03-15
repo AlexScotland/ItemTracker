@@ -11,6 +11,6 @@ class BusinessProductPage(IProductPage):
         self.url = f"https://b2b.canadacomputers.com/product_info.php?cPath=43_557_559&item_id={product_id}"
         response = self.session.get(self.url)
         self.html = response.text
-    
+
     def serialize(self, serializer):
         return serializer.serialize(self.html)

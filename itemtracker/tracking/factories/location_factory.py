@@ -1,7 +1,8 @@
-from lib.cc.models.location import Location
+from tracking.models import Location
 
 
 class LocationFactory():
 
-    def create(self, name, stock):
-        return Location(name, stock)
+    @staticmethod
+    def create(name, company, external_id):
+        return Location(name=name, external_id=external_id, company=company)

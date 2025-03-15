@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class ProductPage(ABC):
+class IProductPage(ABC):
 
     @abstractmethod
     def serialize(self, serializer):
