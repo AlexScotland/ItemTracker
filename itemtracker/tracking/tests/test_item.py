@@ -22,11 +22,9 @@ class ItemTestCase(TestCase):
                                 name="item1",
                                 external_id="1234",
                                 url="http://example.com",
-                                stock=10,
                                 location=self.location)
         test_item.save()
         self.assertEqual(test_item.name, "item1")
         self.assertEqual(test_item.external_id, "1234")
         self.assertEqual(test_item.url, "http://example.com")
-        self.assertEqual(test_item.stock, 10)
         self.assertEqual(test_item.location, self.location)

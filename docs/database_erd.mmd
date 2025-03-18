@@ -9,16 +9,24 @@ erDiagram
 
     Location {
         uid id
-        str name
+        string name
         string external_id
     }
 
     Item {
         uid id
         string external_id
+        string url
+    }
+
+    ItemStock {
+        uid id
         int stock
-        str url
+        fk location_id
+        fk item_id
     }
 
     Company ||--o{ Location: has
     Location ||--o{ Item: stores
+    Location ||--o{ ItemStock: has
+    Item ||--o{ ItemStock: has 
