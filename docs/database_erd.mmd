@@ -3,27 +3,29 @@ title: ItemTracker DB
 ---
 erDiagram
     Company {
-        uid id
+        uid id pk
         string name
     }
 
     Location {
-        uid id
+        uid id pk
         string name
         string external_id
+        company company fk
     }
 
     Item {
-        uid id
+        uid id pk
         string external_id
         string url
+        company company fk
     }
 
     ItemStock {
-        uid id
+        uid id pk
         int stock
-        fk location_id
-        fk item_id
+        Location location fk
+        Item item fk
     }
 
     Company ||--o{ Location: has
