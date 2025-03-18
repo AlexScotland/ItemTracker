@@ -7,8 +7,10 @@ flowchart TB
     create_Company[Create Company]
     create_Product[Create Product]
     create_item[Create Item]
+    create_item_stock[Create ItemStock]
 
     html --> parser
     parser --> create_Company
     parser --> create_Product
     parser --> create_item
+    parser --> create_item_stock
