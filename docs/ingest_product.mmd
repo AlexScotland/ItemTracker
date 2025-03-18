@@ -2,5 +2,13 @@
 title: Flowchart for Ingesting Product Data
 ---
 flowchart TB
+    html[HTML]
+    parser[Serialize HTML]
+    create_Company[Create Company]
+    create_Product[Create Product]
+    create_item[Create Item]
 
-end
+    html --> parser
+    parser --> create_Company
+    parser --> create_Product
+    parser --> create_item
