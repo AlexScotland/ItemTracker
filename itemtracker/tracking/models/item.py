@@ -7,4 +7,4 @@ class Item(models.Model):
     external_id = models.CharField(max_length=255, unique=True, null=True, blank=True)
     name = models.CharField(max_length=255)
     url = models.URLField()
-    location = models.ForeignKey('Location', on_delete=models.CASCADE)
+    company = models.ForeignKey('Company', on_delete=models.CASCADE)

@@ -1,16 +1,16 @@
-from tracking.models import Location, Item, Company
+from tracking.models import Item, Company
 
 
 class ItemFactory:
 
     @staticmethod
     def create(
-                location: Location,
+                company: Company,
                 name: str,
                 url: str,
                 external_id: str = None) -> Item:
         return Item.objects.create(
-            location=location,
+            company=company,
             external_id=external_id,
             name=name,
             url=url)

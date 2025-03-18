@@ -4,6 +4,7 @@ from django.test import TestCase
 
 from ingest.strategies.cc.serializers.html.business_html_serializer import BusinessHTMLSerializer
 from ingest.strategies.cc.models import BusinessProductPage
+from tracking.models import Location
 
 class BusinessCCLocationSerializerTestCase(TestCase):
     """Django TestCase for BusinessHTMLSerializer."""
@@ -21,4 +22,9 @@ class BusinessCCLocationSerializerTestCase(TestCase):
 
             # Serialize the data and test the output
             locations = serializer.serialize()
-            self.assertEqual(location.name, "Head Office")
+            self.assertEqual(isinstance(locations, list), True)
+            self.assertEqual(len(locations), 40)
+            for location in locations:
+                self.assertEqual(isinstance(location, Location), True)
+                item_stock_obj = location.itemstock_set.first()
+                self.assertEqual(item_stock_obj.stock >= 0, True)
