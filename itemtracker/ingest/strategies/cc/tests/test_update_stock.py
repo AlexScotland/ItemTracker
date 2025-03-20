@@ -46,3 +46,43 @@ class UpdateStockViaAPITestCase(TestCase):
                     }
                 )
             self.assertEqual(ItemStock.objects.get(id=self.item_stock.id).stock, 0)
+
+    def test_itemstock_not_found(self):
+        """Test failure when ItemStock does not exist."""
+        # Provide an invalid item ID that does not exist
+        response = self.client.post(
+            reverse('check-stock'),
+            data={'company': self.company.id, 'item': 9999},  # Non-existent item ID
+            format='json'
+        )
+
+        # Assert that the response returns a 404 status
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertIn('error', response.data)
+        self.assertEqual(response.data['error'], 'ItemStock not found for the given item.')
+
+    def test_missing_required_fields(self):
+        """Test failure when required fields are missing."""
+        # Omit the 'item' field in the request data
+        response = self.client.post(
+            reverse('check-stock'),
+            data={'company': self.company.id},  # Missing 'item'
+            format='json'
+        )
+
+        # Assert that the response returns a 400 status
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertIn('item', response.data.get('error'))
+
+    def test_invalid_data(self):
+        """Test failure when invalid data is provided."""
+        # Provide invalid data for the 'item' field
+        response = self.client.post(
+            reverse('check-stock'),
+            data={'company': self.company.id, 'item': '2bf0282e-fa19-4420-ad95-b1aea3d21120' },  # Invalid item ID (string instead of integer)
+            format='json'
+        )
+
+        # Assert that the response returns a 400 status
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertIn('item', response.data.get('error'))

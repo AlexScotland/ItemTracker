@@ -15,7 +15,7 @@ class CheckStock(CreateAPIView):
     def create(self, request, *args, **kwargs):
         # Fetch the ItemStock object based on the item ID from the request
         try:
-            item_stock = ItemStock.objects.get(item=request.data['item'])
+            item_stock = ItemStock.objects.get(item=request.data.get('item'))
         except ItemStock.DoesNotExist:
             return Response(
                 {"error": "ItemStock not found for the given item."},
