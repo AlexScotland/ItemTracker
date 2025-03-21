@@ -15,8 +15,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from rest_framework.permissions import AllowAny
+
+from tracking.api import MAIN_ROUTER
+
+# Swagger schema view
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Item Tracker API",
+        default_version="v1",
+        description="API documentation for Item Tracker",
+    ),
+    public=True,
+    permission_classes=(AllowAny,),
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/cc/', include('ingest.strategies.cc.api.urls')), 
+    path('api/', include(MAIN_ROUTER.urls)),  # Main router for /api
+    path('api/cc/', include('ingest.strategies.cc.api.urls')),   # Secondary router for /api/cc
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),  # Swagger UI
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),  # Redoc UI
 ]

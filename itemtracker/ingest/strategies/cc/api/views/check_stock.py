@@ -28,4 +28,3 @@ class CheckStock(CreateAPIView):
             {"message": "Stock updated successfully."},
             status=status.HTTP_200_OK
         )
-    

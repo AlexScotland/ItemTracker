@@ -5,3 +5,4 @@ beautifulsoup4==4.13.3
 gunicorn==23.0.0
 apprise==1.9.2
 coverage==7.7.0
+drf-yasg==1.21.10

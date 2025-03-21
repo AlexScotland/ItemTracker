@@ -39,13 +39,21 @@ class UpdateStockViaAPITestCase(TestCase):
             mock_response = mock_get.return_value
             mock_response.text = f.read()
 
+            # Check Global Stock Pre Update
+            response = self.client.get(reverse('stock-watch-list'))
+            self.assertEqual(response.data[0]['stock'], 10)
+
             self.client.post(
-                reverse('check-stock'),{
+                reverse('check-stock'), {
                     'company': self.item.company.id,
                     'item': self.item.id
                     }
                 )
             self.assertEqual(ItemStock.objects.get(id=self.item_stock.id).stock, 0)
+
+            # Check Global Stock for Update
+            response = self.client.get(reverse('stock-watch-list'))
+            self.assertEqual(response.data[0]['stock'], 0)
 
     def test_itemstock_not_found(self):
         """Test failure when ItemStock does not exist."""
