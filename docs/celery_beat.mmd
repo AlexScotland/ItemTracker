@@ -1,0 +1,14 @@
+sequenceDiagram
+
+actor CeleryBeat
+participant Scheduler
+participant Worker
+participant API
+participant SiteIngest
+participant DB
+
+
+CeleryBeat->>Scheduler: Schedule Task
+Scheduler->>Worker: Send Task
+Worker->>API: Request 
+
